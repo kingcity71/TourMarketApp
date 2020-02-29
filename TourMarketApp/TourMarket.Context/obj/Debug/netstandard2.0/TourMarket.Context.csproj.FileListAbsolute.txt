@@ -1,0 +1,5 @@
+C:\Users\dimad\Desktop\TourMarketApp\TourMarketApp\TourMarket.Context\bin\Debug\netstandard2.0\TourMarket.Context.deps.json
+C:\Users\dimad\Desktop\TourMarketApp\TourMarketApp\TourMarket.Context\bin\Debug\netstandard2.0\TourMarket.Context.dll
+C:\Users\dimad\Desktop\TourMarketApp\TourMarketApp\TourMarket.Context\obj\Debug\netstandard2.0\TourMarket.Context.csproj.CoreCompileInputs.cache
+C:\Users\dimad\Desktop\TourMarketApp\TourMarketApp\TourMarket.Context\obj\Debug\netstandard2.0\TourMarket.Context.AssemblyInfoInputs.cache
+C:\Users\dimad\Desktop\TourMarketApp\TourMarketApp\TourMarket.Context\obj\Debug\netstandard2.0\TourMarket.Context.AssemblyInfo.cs

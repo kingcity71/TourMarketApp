@@ -1,0 +1,84 @@
+﻿@model IEnumerable<TourMarket.Entities.Order>
+@{
+    ViewData["Title"] = "Admin";
+}
+<style>
+    .basket-container {
+        border-radius: 3px;
+        background: white;
+        padding: 10px;
+        height: 80vh;
+        margin-top: 71px;
+    }
+
+    .glyphicon:hover {
+        cursor: pointer;
+    }
+</style>
+<div class="container basket-container">
+    @if (Model.Any())
+    {
+        <h1>Список заказов</h1>
+        <div class="row">
+            <div class="col-xs-2">
+                Место
+            </div>
+            <div class="col-xs-2">
+                Отель
+            </div>
+            <div class="col-xs-1">
+                Начало
+            </div>
+            <div class="col-xs-1">
+                Окончание
+            </div>
+            <div class="col-xs-1">
+                Мест
+            </div>
+            <div class="col-xs-1">
+                Сумма
+            </div>
+            <div class="col-xs-1">
+                Статус
+            </div>
+            <div class="col-xs-3">
+                Пользователь
+            </div>
+        </div>
+        <hr />
+        foreach (var order in Model)
+        {
+            <div class="row">
+                @Html.Hidden(order.Id.ToString())
+                <div class="col-xs-2">
+                    @order.Hotel.City.Name, @order.Hotel.City.Country.Name
+                </div>
+                <div class="col-xs-2">
+                    @order.Hotel.Name
+                </div>
+                <div class="col-xs-1">
+                    @order.DateFrom.ToShortDateString()
+                </div>
+                <div class="col-xs-1">
+                    @order.DateTo.ToShortDateString()
+                </div>
+                <div class="col-xs-1">
+                    @order.CountPlaces
+                </div>
+                <div class="col-xs-1">
+                    @order.Sum$
+                </div>
+                <div class="col-xs-1" style="color:@(order.State.Description=="Оплачено"?"green":"#337ab7")">
+                    @order.State.Description
+                </div>
+                <div class="col-xs-3">
+                @order.User.Surname @order.User.Name, @order.User.Email
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <h1>Список заказов пуст</h1>
+    }
+</div>

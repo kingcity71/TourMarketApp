@@ -1,0 +1,176 @@
+﻿@model TourMarket.Entities.Hotel
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+    body {
+        background: yellowgreen;
+    }
+
+    .search-area {
+        margin: 10px 0 0 10px;
+    }
+
+        .search-area .glyphicon-search {
+            color: gray;
+            font-size: 30px;
+        }
+
+            .search-area .glyphicon-search:hover {
+                cursor: pointer;
+            }
+
+    .search-container {
+        position: absolute;
+        background: white;
+        width: 300px;
+        z-index: 999;
+    }
+
+    .search-line {
+        padding: 3px 10px;
+    }
+
+        .search-line:hover {
+            cursor: pointer;
+            background: lightgray;
+        }
+
+    .container-hotel {
+        margin: 10px 0;
+        border: 1px solid lightgray;
+        padding: 10px;
+        border-radius: 5px;
+        background: antiquewhite;
+        color: black;
+    }
+
+    .request-button {
+        padding: 5px;
+        border: 1px solid lightgray;
+        border-radius: 3px;
+        text-align: center;
+        background: lightgray;
+        font-weight: bold;
+    }
+
+        .request-button:hover {
+            cursor: pointer;
+        }
+
+    .request-header {
+        font-size: 18px;
+        padding: 5px;
+        text-align: center;
+    }
+</style>
+@if (ViewBag.User != null)
+{
+    <div id="user" data-exist="1" hidden></div>
+}
+else
+{
+    <div id="user" data-exist="0" hidden></div>
+}
+@Html.HiddenFor(m => m.Id)
+<div class="container-result">
+    <div class="container-hotel col-xs-12 col-xs-offset-1" id="search-container-result">
+        <div class="col-xs-2 request-header">Запрос мест</div>
+        <div class="col-xs-3">
+            <input class="data form-control datetimepicker" placeholder="С какого?" id="dateFrom" />
+        </div>
+        <div class="col-xs-3">
+            <input class="data form-control datetimepicker" placeholder="По какое?" id="dateTo" />
+        </div>
+        <div class="col-xs-2">
+            <input class="form-control" placeholder="Кол-во мест" id="countPlace" />
+        </div>
+        <div class="col-xs-2 request-button" id="getSumOfPlaces">Отправить</div>
+    </div>
+    <div class="container-hotel col-xs-12 col-xs-offset-1">
+        <div class="col-xs-6">
+            <h2>
+                @Model.Name
+                @for (var i = 0; i < Model.Stars; i++)
+                {
+                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                }
+            </h2>
+        </div>
+        <div class="col-xs-6">
+            <h4 style="text-align:right">@Model.City.Country.Name, @Model.City.Name</h4>
+        </div>
+        <div class="col-xs-offset-4 col-xs-7" style="text-align:right">
+            @Model.Description
+        </div>
+    </div>
+
+</div>
+<script>
+    $(function () {
+        $('.datetimepicker').datetimepicker({
+            locale: 'ru',
+            stepping: 10,
+            format: 'DD.MM.YYYY'
+        });
+    });
+
+    $('#getSumOfPlaces').on('click', function () {
+        var url = "/hotel/GetSumOfPlaces";
+        var hotelId = $('#Id').val();
+        var dateFrom = $('#dateFrom').val();
+        var dateTo = $('#dateTo').val();
+        var countPlace = $('#countPlace').val();
+        $('#search-container-result .result-block').remove();
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: {
+                hotelId: hotelId,
+                dateFrom: dateFrom,
+                dateTo: dateTo,
+                countPlaces: countPlace
+            },
+            success: function (sum) {
+                if (sum >= 0) {
+                    var containerHotel = $('#search-container-result');
+                    var html = '<div class="col-xs-8 result-block" style="text-align:center">Места найдены! Сумма : ' + sum + '</div>';
+                    var userExist = $('#user').data('exist');
+                    if (userExist=='1')
+                        html += '<div class="col-xs-2 result-block request-button" onclick="addToBasket()">В корзину</div>';
+                    containerHotel.append(html);
+                }
+                else {
+                    var containerHotel = $('#search-container-result');
+                    var html = '<div class="col-xs-8 result-block" style="text-align:center">Мест нет!</div>';
+                    containerHotel.append(html);
+                }
+            }
+        });
+    });
+    function addToBasket() {
+        var url = "/basket/AddToBasket";
+        var hotelId = $('#Id').val();
+        var dateFrom = $('#dateFrom').val();
+        var dateTo = $('#dateTo').val();
+        var countPlace = $('#countPlace').val();
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: {
+                hotelId: hotelId,
+                dateFrom: dateFrom,
+                dateTo: dateTo,
+                countPlaces: countPlace
+            },
+            success: function (success) {
+                if (success) {
+                    $('.result-block').remove();
+                    var containerHotel = $('#search-container-result');
+                    var html = '<div class="col-xs-8 result-block" style="text-align:center">Успешно добавлено в корзину!</div>';
+                    containerHotel.append(html);
+                }
+            }
+        });
+    }
+</script>

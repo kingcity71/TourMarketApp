@@ -1,0 +1,15 @@
+C:\Users\dimad\Desktop\TourMarketApp\TourMarketApp\TourMarket\bin\Debug\netstandard2.0\TourMarket.BLL.deps.json
+C:\Users\dimad\Desktop\TourMarketApp\TourMarketApp\TourMarket\bin\Debug\netstandard2.0\TourMarket.BLL.dll
+C:\Users\dimad\Desktop\TourMarketApp\TourMarketApp\TourMarket\bin\Debug\netstandard2.0\TourMarket.BLL.pdb
+C:\Users\dimad\Desktop\TourMarketApp\TourMarketApp\TourMarket\bin\Debug\netstandard2.0\TourMarket.DAL.dll
+C:\Users\dimad\Desktop\TourMarketApp\TourMarketApp\TourMarket\bin\Debug\netstandard2.0\TourMarket.Entities.dll
+C:\Users\dimad\Desktop\TourMarketApp\TourMarketApp\TourMarket\bin\Debug\netstandard2.0\TourMarket.Interfaces.dll
+C:\Users\dimad\Desktop\TourMarketApp\TourMarketApp\TourMarket\bin\Debug\netstandard2.0\TourMarket.DAL.pdb
+C:\Users\dimad\Desktop\TourMarketApp\TourMarketApp\TourMarket\bin\Debug\netstandard2.0\TourMarket.Interfaces.pdb
+C:\Users\dimad\Desktop\TourMarketApp\TourMarketApp\TourMarket\bin\Debug\netstandard2.0\TourMarket.Entities.pdb
+C:\Users\dimad\Desktop\TourMarketApp\TourMarketApp\TourMarket\obj\Debug\netstandard2.0\TourMarket.BLL.csprojAssemblyReference.cache
+C:\Users\dimad\Desktop\TourMarketApp\TourMarketApp\TourMarket\obj\Debug\netstandard2.0\TourMarket.BLL.AssemblyInfoInputs.cache
+C:\Users\dimad\Desktop\TourMarketApp\TourMarketApp\TourMarket\obj\Debug\netstandard2.0\TourMarket.BLL.AssemblyInfo.cs
+C:\Users\dimad\Desktop\TourMarketApp\TourMarketApp\TourMarket\obj\Debug\netstandard2.0\TourMarket.BLL.csproj.CopyComplete
+C:\Users\dimad\Desktop\TourMarketApp\TourMarketApp\TourMarket\obj\Debug\netstandard2.0\TourMarket.BLL.dll
+C:\Users\dimad\Desktop\TourMarketApp\TourMarketApp\TourMarket\obj\Debug\netstandard2.0\TourMarket.BLL.pdb

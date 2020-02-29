@@ -1,0 +1,177 @@
+﻿@model List<TourMarket.Entities.Hotel>
+@{
+    //Layout = null;
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+    body {
+        background: yellowgreen;
+    }
+
+    .search-area {
+        margin: 10px 0 0 10px;
+    }
+
+        .search-area .glyphicon-search {
+            color: gray;
+            font-size: 30px;
+        }
+
+            .search-area .glyphicon-search:hover {
+                cursor: pointer;
+            }
+     .search-container{
+        position: absolute;
+        background: white;
+        width: 300px;
+        z-index:999;
+    }
+     .search-line{
+         padding:3px 10px;
+     }
+    .search-line:hover {
+        cursor: pointer;
+        background:lightgray;
+    }
+    .container-hotel{
+        margin:10px 0;
+        border:1px solid lightgray;
+        padding:10px;
+        border-radius:5px;
+        background:antiquewhite;
+        color: black;
+    }
+    .container-hotel:hover{
+        cursor:pointer;
+        border:3px solid black;
+    }
+</style>
+<div class="search-area">
+    <div class="col-lg-12 col-xs-offset-1">
+        <div class="col-xs-6 search-place-area">
+            <input class="form-control" placeholder="Куда отправляемся?" id="search-place" onkeyup="SearchPlaces(this)" data-id=''>
+        </div>
+        <div class="col-xs-2 search-date-area">
+            <input class="form-control datetimepicker" id="dateFrom" placeholder="C какого?">
+        </div>
+        <div class="col-xs-2 search-date-area">
+            <input class="form-control datetimepicker" id="dateTo" placeholder="По какое?">
+        </div>
+        <div class="col-xs-2">
+            <span class="glyphicon glyphicon-search" id="search-button" aria-hidden="true"></span>
+        </div>
+    </div>
+</div>
+<div class="container-result">
+    @foreach(var hotel in Model)
+    {
+    <div class="container-hotel col-xs-12 col-xs-offset-1" data-id="@hotel.Id" onclick="RedirectToHotel(this)">
+        <div class="col-xs-6">
+            <h2>
+                @hotel.Name
+                @for (var i = 0; i < hotel.Stars; i++)
+                {
+                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                }
+            </h2>
+        </div>
+        <div class="col-xs-6">
+            <h4 style="text-align:right">@hotel.City.Country.Name, @hotel.City.Name</h4>
+        </div>
+        <div class="col-xs-offset-4 col-xs-7" style="text-align:right">
+            @hotel.Description
+        </div>
+    </div>
+    }
+</div>
+<script> 
+    $(function () {
+     $('.datetimepicker').datetimepicker({
+         locale: 'ru',
+         stepping: 10,
+         format: 'DD.MM.YYYY'
+     });
+ });
+    function SearchPlaces(context) {
+        DropSearchPlaceList();
+        var el = $(context);
+        el.closest('.search-date-area').find('.search-container').remove();
+        var value = el.val();
+        if (value.length < 3) return;
+        var url = '/home/searchplaces?key=' + value;
+        var block = "<div class='search-container'>";
+        $.get(url).success(function (data) {
+            for (var key in data) {
+                var value = data[key];
+                var line = "<div class='search-line' data-id='" + value + "' data-value='" + key+"' onclick='SetPlace(this)'>" + key + "</div>";
+                block += line;
+            }
+            block += "</div>";
+            el.parent().append(block);    
+        });
+    }
+    
+    function SetPlace(context) {
+        var el = $(context);
+        var id = el.data('id');
+        console.log(id);
+        $('#search-place').data('id', id);
+        var value = el.data('value')
+        $('#search-place').val(value);
+        DropSearchPlaceList();
+    }
+
+    $(document).on('click', function () { DropSearchPlaceList() });
+
+    function DropSearchPlaceList(html) {
+        $('.search-container').remove();
+    }
+
+    $('#search-button').on('click', function () {
+        var el = $(this);
+        var id = $('#search-place').data('id');
+        var dateFrom = $('#dateFrom').val();
+        var dateTo = $('#dateTo').val();
+        var url ='/hotel/searchservice?cityId=' + id + '&dateFrom=' + dateFrom + '&dateTo=' + dateTo;
+        console.log(dateTo);
+        console.log(dateFrom);
+        console.log(id);
+        console.log(url);
+        $('#search-place').data('id', id);
+        var value = el.data('value')
+        $('#search-place').val(value);
+        $.get(url).success(function (data) {
+            console.log(data);
+            var htmlCode = "";
+            for (var i = 0; i < data.length;i++) {
+                htmlCode += "<div class='container-hotel col-xs-12 col-xs-offset-1' data-id='" + data[i].id + "' onclick='RedirectToHotel(this)'>"+
+                "<div class='col-xs-6'>" +
+                    "<h2>" + data[i].name;
+                    for (var j = 0; j <data[i].stars; j++)
+                    {
+                        htmlCode += "<span class='glyphicon glyphicon-star' aria-hidden='true'></span>";
+                    }
+                htmlCode += "</h2>" +
+                    "</div>" +
+                    "<div class='col-xs-6'>" +
+                    "<h4 style='text-align:right'>" + data[i].city.name + ", " + data[i].city.country.name + "</h4>" +
+                    "</div>" +
+                    "<div class='col-xs-offset-4 col-xs-7' style='text-align:right'>" +
+                    data[i].description +
+                    "</div>" +
+                    "</div>";
+            }
+            $('.container-result').empty();
+            console.log(htmlCode);
+            $('.container-result').html(htmlCode);
+        });
+        
+    });
+
+    function RedirectToHotel(context) {
+        var id = $(context).data('id');
+        window.location.href = "/hotel?hotelid=" + id;
+    }
+    
+</script>

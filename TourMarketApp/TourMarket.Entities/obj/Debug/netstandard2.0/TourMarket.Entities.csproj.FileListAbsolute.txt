@@ -1,0 +1,8 @@
+C:\Users\dimad\Desktop\TourMarketApp\TourMarketApp\TourMarket.Entities\bin\Debug\netstandard2.0\TourMarket.Entities.deps.json
+C:\Users\dimad\Desktop\TourMarketApp\TourMarketApp\TourMarket.Entities\bin\Debug\netstandard2.0\TourMarket.Entities.dll
+C:\Users\dimad\Desktop\TourMarketApp\TourMarketApp\TourMarket.Entities\bin\Debug\netstandard2.0\TourMarket.Entities.pdb
+C:\Users\dimad\Desktop\TourMarketApp\TourMarketApp\TourMarket.Entities\obj\Debug\netstandard2.0\TourMarket.Entities.csprojAssemblyReference.cache
+C:\Users\dimad\Desktop\TourMarketApp\TourMarketApp\TourMarket.Entities\obj\Debug\netstandard2.0\TourMarket.Entities.AssemblyInfoInputs.cache
+C:\Users\dimad\Desktop\TourMarketApp\TourMarketApp\TourMarket.Entities\obj\Debug\netstandard2.0\TourMarket.Entities.AssemblyInfo.cs
+C:\Users\dimad\Desktop\TourMarketApp\TourMarketApp\TourMarket.Entities\obj\Debug\netstandard2.0\TourMarket.Entities.dll
+C:\Users\dimad\Desktop\TourMarketApp\TourMarketApp\TourMarket.Entities\obj\Debug\netstandard2.0\TourMarket.Entities.pdb

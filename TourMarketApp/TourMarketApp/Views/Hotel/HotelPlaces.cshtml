@@ -1,0 +1,64 @@
+﻿@using TourMarket.Entities
+@model List<HotelPlace>
+@{
+    var hotelId = ViewBag.HotelId;
+    ViewData["Title"] = "HotelPlaces";
+}
+
+@if (Model == null || !Model.Any())
+{
+    <div class="edit-form col-xs-12 col-xs-offset-2">
+        <div class="edit-form-line">
+            <div class="col-xs-10 edit-form-header">
+                Список мест пуст
+            </div>
+            <div class="col-xs-2">
+                <a href="/hotel/CreateHotelPlaces?hotelId=@hotelId">Добавить</a>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="edit-form col-xs-12 col-xs-offset-2">
+        <div class="edit-form-line">
+            <div class="col-xs-10 edit-form-header">
+                Список мест в отеле @Model.FirstOrDefault().Hotel.Name
+            </div>
+            <div class="col-xs-2">
+                <a href="/hotel/CreateHotelPlaces?hotelId=@Model.FirstOrDefault().Hotel.Id">Добавить</a>
+            </div>
+        </div>
+
+        <div class="edit-form-line col-xs-12" style="font-weight:bold">
+            <div class="col-xs-3 text-center">
+                Дата
+            </div>
+            <div class="col-xs-3 text-center">
+                Кол-во свободных мест
+            </div>
+            <div class="col-xs-3 text-center">
+                Стоимость
+            </div>
+        </div>
+
+        @foreach (var hotelPlace in Model)
+        {
+            <div class="edit-form-line">
+                <div class="col-xs-3 text-center">
+                    @hotelPlace.Date.ToString("dd.MM.yyyy")
+                </div>
+                <div class="col-xs-3 text-center">
+                    @hotelPlace.CountPlaces
+                </div>
+                <div class="col-xs-3 text-center">
+                    @hotelPlace.PriceForDay
+                </div>
+                <div class="col-xs-3 text-center">
+                    <a href="/hotel/EditHotelPlaces?hotelPlaceId=@hotelPlace.Id">Редактировать</a>
+                </div>
+            </div>
+        }
+    </div>
+
+}

@@ -1,0 +1,26 @@
+﻿@model List<TourMarket.Entities.Country>
+@{
+    ViewData["Title"] = "Countries";
+}
+<div class="edit-form col-xs-12 col-xs-offset-2">
+    <div class="edit-form-line">
+        <div class="col-xs-10 edit-form-header">
+            Список стран
+        </div>
+        <div class="col-xs-2">
+            <a href="/country/create/">Добавить</a>
+        </div>
+    </div>
+    
+    @foreach(var country in Model)
+    {
+        <div class="edit-form-line">
+            <div class="col-xs-6 col-xs-offset-1 text-right">
+                @country.Name
+            </div>
+            <div class="col-xs-6 col-xs-offset-1 text-left">
+                <a href="/country/edit?countryId=@country.Id">Редактировать</a>
+            </div>
+        </div>    
+    }
+</div>

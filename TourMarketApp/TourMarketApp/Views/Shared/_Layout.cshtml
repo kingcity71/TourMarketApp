@@ -1,0 +1,111 @@
+﻿@{ 
+    var user = (TourMarket.Entities.User)ViewBag.User;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TourMarketApp</title>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/js/moment-with-locales.min.js"></script>
+    <script src="~/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/bootstrap-datetimepicker.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+</head>
+<body>
+    <style>
+        .person-area {
+            margin: 10px 0;
+            text-align: center;
+            border: 1px solid lightgray;
+            padding: 10px;
+            border-radius: 5px;
+            background: antiquewhite;
+            color: black;
+        }
+    </style>
+    @*<div class="col-xs-1"></div>
+    <div class="person-area col-xs-10 col-xs-offset-1">
+        <div class="col-xs-3">UserName</div>
+
+        <div class="col-xs-3" ><a href="/settings/index/">Настройки</a></div>
+
+        <div class="col-xs-3">LogOut</div>
+        <div class="col-xs-3">@DateTime.Now.Date.ToString("dd.MM.yyyy")</div>
+    </div>*@
+    @if (user!=null)
+        {
+            <div class="col-xs-1"></div>
+
+            <div class="person-area col-xs-10 col-xs-offset-1">
+                <div class="col-xs-2"><a href="/home/index/">На главную</a></div>
+                <div class="col-xs-3">@($"{user.Name} {user.Surname}")</div>
+                @if (user.Role.Description.ToLower() == "admin")
+                {
+                    <div class="col-xs-2"><a href="/settings/index/">Настройки</a></div>
+                    <div class="col-xs-1"><a href="/basket/admin/">Заказы</a></div>
+                }
+                else
+                {
+                    <div class="col-xs-3"><a href="/basket/index/">Корзина</a></div>
+                }
+                <div class="col-xs-2"><a href="/home/logout/">Выйти</a></div>
+                <div class="col-xs-2">@DateTime.Now.Date.ToString("dd.MM.yyyy")</div>
+            </div>
+        }
+        else
+        {
+            <div class="col-xs-1"></div>
+            <div class="person-area col-xs-10 col-xs-offset-1">
+                <div class="col-xs-3"><a href="/home/index/">На главную</a></div>
+                <div class="col-xs-3"><a href="/home/login/">Войти</a></div>
+                <div class="col-xs-3"><a href="/home/register/">Зарегистрироваться</a></div>
+                <div class="col-xs-3">@DateTime.Now.Date.ToString("dd.MM.yyyy")</div>
+            </div>
+        }
+
+
+
+    <div class="container body-content">
+        @RenderBody()
+        @*<hr />
+            <footer>
+                <p>&copy; 2019 - TourMarketApp</p>
+            </footer>*@
+    </div>
+
+    <environment include="Development">
+
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

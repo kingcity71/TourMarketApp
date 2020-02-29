@@ -1,0 +1,53 @@
+﻿@using TourMarket.Entities;
+@model HotelPlace
+@{
+    ViewData["Title"] = "Create";
+}
+<form method="post" autocomplete="off">
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.Hotel.Id)
+    <div class="edit-form col-xs-12 col-xs-offset-2">
+        <div class="edit-form-line">
+            <div class="col-xs-10 col-xs-offset-2 edit-form-header">
+                Редактировать место в отель @Model.Hotel.Name
+            </div>
+            <div class="col-xs-2 edit-form-save-btn">
+                <button type="submit">Сохранить</button>
+            </div>
+        </div>
+        <div class="edit-form-line">
+            <div class="col-xs-4 col-xs-offset-1 text-right">
+                Дата
+            </div>
+            <div class="col-xs-6 col-xs-offset">
+                @Html.TextBoxFor(m => m.Date, new { @class = "form-control datetimepicker", disabled= "disabled" })
+            </div>
+        </div>
+
+        <div class="edit-form-line">
+            <div class="col-xs-4 col-xs-offset-1 text-right">
+                Кол-во мест
+            </div>
+            <div class="col-xs-6 col-xs-offset">
+                @Html.TextBoxFor(m => m.CountPlaces, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="edit-form-line">
+            <div class="col-xs-4 col-xs-offset-1 text-right">
+                Стоимость в день
+            </div>
+            <div class="col-xs-6 col-xs-offset">
+                @Html.TextBoxFor(m => m.PriceForDay, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    $(function () {
+        $('.datetimepicker').datetimepicker({
+            locale: 'ru',
+            stepping: 10,
+            format: 'DD.MM.YYYY'
+        });
+    }); </script>

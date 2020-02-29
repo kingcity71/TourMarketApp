@@ -1,0 +1,55 @@
+﻿@using TourMarket.Entities;
+@model Hotel
+@{
+    var cities = (List<City>)ViewBag.Cities;
+    var dropDownListCitites = cities.Select(x => new SelectListItem() { Text = $"{x.Country.Name}, {x.Name}", Value = x.Id.ToString() }).ToList();
+    var dropDownListStars = Enumerable.Range(1, 5).Select(x => new SelectListItem() { Text = x.ToString(), Value = x.ToString() }).ToList();
+    ViewData["Title"] = "Create";
+}
+<form method="post" autocomplete="off">
+    <div class="edit-form col-xs-12 col-xs-offset-2">
+        <div class="edit-form-line">
+            <div class="col-xs-10 col-xs-offset-2 edit-form-header">
+                Добавить отель
+            </div>
+            <div class="col-xs-2 edit-form-save-btn">
+                <button type="submit">Сохранить</button>
+            </div>
+        </div>
+        <div class="edit-form-line">
+            <div class="col-xs-4 col-xs-offset-1 text-right">
+                Название
+            </div>
+            <div class="col-xs-6 col-xs-offset">
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="edit-form-line">
+            <div class="col-xs-4 col-xs-offset-1 text-right">
+                Город
+            </div>
+            <div class="col-xs-6 col-xs-offset">
+                @Html.DropDownListFor(m => m.City.Id, dropDownListCitites, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="edit-form-line">
+            <div class="col-xs-4 col-xs-offset-1 text-right">
+                Кол-во звезд
+            </div>
+            <div class="col-xs-6 col-xs-offset">
+                @Html.DropDownListFor(m => m.Stars, dropDownListStars, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="edit-form-line">
+            <div class="col-xs-4 col-xs-offset-1 text-right">
+                Описание
+            </div>
+            <div class="col-xs-6 col-xs-offset">
+                @Html.TextAreaFor(m=>m.Description, new{ @class="form-control"})
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,29 @@
+﻿@model List<TourMarket.Entities.Hotel>
+@{
+    ViewData["Title"] = "Hotels";
+}
+<div class="edit-form col-xs-12 col-xs-offset-2">
+    <div class="edit-form-line">
+        <div class="col-xs-10 edit-form-header">
+            Список отелей
+        </div>
+        <div class="col-xs-2">
+            <a href="/hotel/create/">Добавить</a>
+        </div>
+    </div>
+
+    @foreach (var hotel in Model)
+    {
+    <div class="edit-form-line">
+        <div class="col-xs-4 col-xs-offset-1 text-right">
+            @($"{hotel.Name}, {hotel.City.Country.Name}, {hotel.City.Name}")
+        </div>
+        <div class="col-xs-4 col-xs-offset-1 text-left">
+            <a href="/hotel/edit?hotelId=@hotel.Id">Редактировать</a>
+        </div>
+        <div class="col-xs-4 col-xs-offset-1 text-left">
+            <a href="/hotel/hotelPlaces?hotelId=@hotel.Id">Редактировать места</a>
+        </div>
+    </div>
+    }
+</div>
